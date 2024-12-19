@@ -1,0 +1,95 @@
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+
+% ACM
+%\usepackage[tt=false, type1=true]{libertine}
+%\usepackage[varqu]{zi4}
+%\usepackage[libertine]{newtxmath}
+
+% IEEE
+\renewcommand{\sfdefault}{phv}
+\renewcommand{\rmdefault}{ppl}
+\renewcommand{\ttdefault}{pcr}
+\usepackage{mathptmx}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{colormaps}
+\tikzset{
+	bar-color/.style={
+		color of colormap={#1},
+		draw=.!80!black,
+		fill=.!80!white,
+	},
+	normal-color/.style={
+		color of colormap={#1},
+		draw=.,
+	},
+	mydashed/.style={dash pattern=on 6pt off 4pt}
+}
+%% Creating my custom viridis with white in zero
+%% from: https://bookdown.org/hneth/ds4psy/D-4-apx-colors-pkgs.html
+%\pgfplotsset{
+%	colormap={cfviridis}{
+%		rgb255=(255,255,255)
+%		rgb255=(68,1,84)
+%		rgb255=(72,40,120)
+%		rgb255=(62,74,137)
+%		rgb255=(49,104,142)
+%		rgb255=(38,130,142)
+%		rgb255=(31,158,137)
+%		rgb255=(53,183,121)
+%		rgb255=(109,205,89)
+%		rgb255=(180,222,44)
+%		rgb255=(253,231,37)
+%	},
+%}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{groupplot}[group style={group name=myplot,
+	group size= 3 by 1},height=6cm,width=2.5cm,
+scale only axis,
+enlargelimits=false,
+axis on top,
+ymin=-0.5,ymax=4.5,xmin=-0.5,xmax=4.5,
+xtick={0,1,2,3,4},
+xlabel style={font=\huge},
+ylabel style={font=\huge},
+xticklabel style={font=\LARGE},
+yticklabel style={font=\LARGE},
+title style={font=\huge},
+]
+\nextgroupplot[title={$t-2$},ylabel={Cells ($c$)}
+view={0}{90},% not needed for `matrix plot*' variant
+point meta min=0, point meta max=0.067,
+colormap/viridis]
+\addplot [matrix plot*,	point meta=explicit] file [meta=index 2] {./euma_local_mae_fig5b_h-2.dat};
+\nextgroupplot[title={$t-1$},xlabel={Cells ($r$)},
+view={0}{90},% not needed for `matrix plot*' variant
+point meta min=0, point meta max=0.067,
+colormap/viridis]
+\addplot [matrix plot*,	point meta=explicit] file [meta=index 2] {./euma_local_mae_fig5b_h-1.dat};
+\nextgroupplot[title={$t$},
+colorbar,
+colorbar style={
+	ytick={0,0.0167,...,0.067},
+	yticklabels={0.00,0.25,0.50,0.75,1.00},
+	yticklabel style={%
+		scaled y ticks = false,
+		/pgf/number format/.cd,
+		fixed,
+		precision=1,
+		fixed zerofill,
+	},
+},
+view={0}{90},% not needed for `matrix plot*' variant
+point meta min=0, point meta max=0.067,
+colormap/viridis]
+\addplot[matrix plot*,	point meta=explicit] file [meta=index 2] {./euma_local_mae_fig5b_h.dat};
+\end{groupplot}
+\end{tikzpicture}
+\end{document}
