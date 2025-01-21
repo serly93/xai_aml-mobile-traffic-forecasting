@@ -1,5 +1,5 @@
 # Introduction
-This repository contains the source code for our paper "Spotting Deep Neural Network Vulnerabilities in Mobile Traffic Forecasting with an Explainable AI Lens" published on Infocom 2022. 
+This repository contains the source code for our paper "Spotting Deep Neural Network Vulnerabilities in Mobile Traffic Forecasting with an Explainable AI Lens" published on Infocom 2023. 
 You can cite us as: 
 > Moghadas Gholian, S., Fiandrino, C., Collet, A., Attanasio, G., Fiore, M., & Widmer, J. (2023). Spotting Deep Neural Network Vulnerabilities in Mobile Traffic Forecasting with an Explainable AI Lens. In IEEE International Conference on Computer Communications.
 ## Structure of the repo
